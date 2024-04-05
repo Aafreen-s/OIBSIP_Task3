@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Temperature Converter</title>
+    <link rel="stylesheet" href="index.css">
+	
+</head>
+<body>
+
+<div class="container">
+
+<h1>Temperature Converter</h1>
+
+<!-- Input Field -->
+<input id="temperatureInput" type="number" placeholder="Enter Temperature" required>
+<br><br>
+
+<!-- Temperature Selection -->
+<label>
+  Celsius
+  <input type="radio" name="temperature" value="Celsius" checked>
+</label>
+<label>
+  Fahrenheit
+  <input type="radio" name="temperature" value="Fahrenheit">
+</label>
+<br><br>
+
+<!-- Convert Button -->
+<button id="convertButton" onclick="convertTemperature()">Convert</button>
+<br><br>
+
+<!-- Display Area -->
+<p id="displayArea"></p>
+
+<script>
+    // Function to convert temperature from Celsius to Fahrenheit
+    function convertToFahrenheit(celsius) {
+      return (celsius * 9/5) + 32;
+    }
+    
+    // Function to convert temperature from Fahrenheit to Celsius
+    function convertToCelsius(fahrenheit) {
+      return (fahrenheit - 32) * 5/9;
+    }
+    
+    // Function to convert temperature
+    function convertTemperature() {
+      // Get the input value and selected temperature unit
+      const temperatureInput = document.getElementById("temperatureInput");
+      const temperature = parseFloat(temperatureInput.value);
+      const temperatureUnit = document.querySelector('input[name="temperature"]:checked').value;
+    
+      if (temperature === "" || isNaN(temperature)) {
+        alert("Please enter a valid temperature.");
+        return;
+      }
+    
+      let convertedTemperature;
+      if (temperatureUnit === "Celsius") {
+        convertedTemperature = convertToFahrenheit(temperature);
+        document.getElementById("displayArea").textContent = convertedTemperature.toFixed(2) + " °F";
+      } else if (temperatureUnit === "Fahrenheit") {
+        convertedTemperature = convertToCelsius(temperature);
+        document.getElementById("displayArea").textContent = convertedTemperature.toFixed(2) + " °C";
+      }
+    }
+    </script>
